@@ -5,7 +5,9 @@ It requires pspell and an aspell dictionary for each language that you want to d
 ## Prerequisites
 Install pspell and one or more aspell dictionaries of your choice
 On Ubuntu and other Debian based distro you can type
+
 	sudo apt-get install php5-pspell aspell-en
+
 to install pspell and the english aspell dictionary.
 
 ## Usage examples
@@ -23,7 +25,7 @@ This will print
 
 because $text is in italian.
 
-Please, note that getLang will return false if the most probable language has a probability that is lower than a threshold (0.75 by default)!
+Please note that getLang will return false if the most probable language has a probability that is lower than a threshold (0.75 by default)!
 You can use
 
 	$ld->setThres(0.5);
