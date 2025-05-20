@@ -62,7 +62,7 @@ class LangDetector{
 	}
 
 	/**
-	 * Returns the most probable language for the given $text if the probability is above a threshold (0.75 by default), false otherwhise.
+         * Returns the most probable language for the given $text if the probability is above a threshold (0.75 by default), false otherwise.
 	 */
 	function getLang($text){
 		$probs = $this->getProbabilities($text);
