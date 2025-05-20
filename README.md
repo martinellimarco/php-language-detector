@@ -38,12 +38,15 @@ You may be interested in the probability of $text to be any of the languages.
 
 will return
 
-	Array
-	(
-		[it] => 1
-		[fr] => 0.45454545454545
-		[en] => 0.36363636363636
-	)
+        Array
+        (
+                [it] => 1
+                [fr] => 0.45454545454545
+                [en] => 0.36363636363636
+        )
+
+If the input text contains no valid words after filtering, `getProbabilities` returns
+zero for all languages.
 
 Finally, the input text is filtered in order to better detect the language.
 The filter will strip out all sort of characters allowing the library to detect the language of texts like the following.
