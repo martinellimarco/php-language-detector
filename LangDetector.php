@@ -36,19 +36,25 @@ class LangDetector{
 		return strlen(trim($word))>0;
 	}
 
-	/**
-	 * Returns an associative array that map each language code to the probability that $text is of that language.
-	 */
+        /**
+         * Returns an associative array that map each language code to the probability that $text is of that language.
+         * If the input contains no valid words, all languages are returned with a probability of 0.
+         */
 	function getProbabilities($text){
 		$probs=Array();
 
-		$words = array_filter(explode(' ',str_replace($this->badChars,' ',$text)), array($this, 'filter'));
+                $words = array_filter(explode(' ',str_replace($this->badChars,' ',$text)), array($this, 'filter'));
 
-		$totalWords=count($words);
+                $totalWords=count($words);
 
-		foreach($this->langs as $lang){
-			$pspell = pspell_new($lang);
-			$goodWords=0;
+                // Return zero probabilities when there are no valid words
+                if ($totalWords === 0) {
+                        return array_fill_keys($this->langs, 0);
+                }
+
+                foreach($this->langs as $lang){
+                        $pspell = pspell_new($lang);
+                        $goodWords=0;
 			foreach($words as $word){
 				if(pspell_check($pspell, $word)){
 					$goodWords++;
@@ -61,9 +67,9 @@ class LangDetector{
 		return $probs;
 	}
 
-        /**
-         * Returns the most probable language for the given $text if the probability is at or above a threshold (0.75 by default), false otherwhise.
-         */
+  /**
+  * Returns the most probable language for the given $text if the probability is at or above a threshold (0.75 by default), false otherwhise.
+  */
 	function getLang($text){
 		$probs = $this->getProbabilities($text);
 		$lang = key($probs);
